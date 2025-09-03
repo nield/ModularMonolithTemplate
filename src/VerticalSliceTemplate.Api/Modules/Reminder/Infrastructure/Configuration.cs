@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore.Diagnostics;
-using VerticalSliceTemplate.Api.Modules.Reminder.Common.Interfaces;
 
 namespace VerticalSliceTemplate.Api.Modules.Reminder.Infrastructure;
 

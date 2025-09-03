@@ -1,6 +1,4 @@
-﻿using VerticalSliceTemplate.Api.Modules.Reminder.Common.Interfaces;
-
-namespace VerticalSliceTemplate.Api.Modules.Reminder.Endpoints.V1.Todos;
+﻿namespace VerticalSliceTemplate.Api.Modules.Reminder.Endpoints.V1.Todos;
 
 public sealed class GetById : IEndpoint
 {

@@ -1,7 +1,5 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using VerticalSliceTemplate.Api.Common.Infrastructure.Persistance;
-using VerticalSliceTemplate.Api.Modules.Reminder.Entities;
 
 namespace VerticalSliceTemplate.Api.Modules.Reminder.Infrastructure.Persistance.Configuration;
 

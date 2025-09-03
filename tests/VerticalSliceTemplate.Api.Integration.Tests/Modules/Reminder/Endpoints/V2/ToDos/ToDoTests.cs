@@ -1,5 +1,4 @@
-﻿using System.Net.Http.Json;
-using VerticalSliceTemplate.Api.Modules.Reminder.Endpoints.V2.Todos;
+﻿using VerticalSliceTemplate.Api.Modules.Reminder.Endpoints.V2.Todos;
 
 namespace VerticalSliceTemplate.Api.Integration.Tests.Modules.Reminder.Endpoints.V2.ToDos;
 

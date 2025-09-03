@@ -1,6 +1,4 @@
 ﻿using System.Net;
-using System.Net.Http.Json;
-using FizzWare.NBuilder;
 using VerticalSliceTemplate.Api.Modules.Reminder.Endpoints.V1.Todos;
 
 namespace VerticalSliceTemplate.Api.Integration.Tests.Modules.Reminder.Endpoints.V1.ToDos;

@@ -1,6 +1,4 @@
 ﻿using System.Reflection;
-using VerticalSliceTemplate.Api.Modules.Reminder.Common.Interfaces;
-using VerticalSliceTemplate.Api.Modules.Reminder.Entities;
 
 namespace VerticalSliceTemplate.Api.Modules.Reminder.Infrastructure.Persistance;
 

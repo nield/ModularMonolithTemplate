@@ -1,8 +1,4 @@
-﻿using VerticalSliceTemplate.Api.Common.Infrastructure.Persistance;
-using VerticalSliceTemplate.Api.Modules.Reminder.Common.Interfaces;
-using VerticalSliceTemplate.Api.Modules.Reminder.Entities;
-
-namespace VerticalSliceTemplate.Api.Modules.Reminder.Infrastructure.Persistance.Repositories;
+﻿namespace VerticalSliceTemplate.Api.Modules.Reminder.Infrastructure.Persistance.Repositories;
 
 public class ToDoRepository : BaseRepository<ToDoItem>, IToDoRepository
 {

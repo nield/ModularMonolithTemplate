@@ -1,6 +1,4 @@
-﻿using VerticalSliceTemplate.Api.Common.Infrastructure.Persistance;
-
-namespace VerticalSliceTemplate.Api.Modules.Reminder.Entities;
+﻿namespace VerticalSliceTemplate.Api.Modules.Reminder.Entities;
 
 public class ToDoItem : BaseAuditableEntity
 {

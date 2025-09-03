@@ -1,5 +1,4 @@
 ﻿using System.Diagnostics.CodeAnalysis;
-using VerticalSliceTemplate.Api.Modules.Reminder.Entities;
 
 namespace VerticalSliceTemplate.Api.Modules.Reminder.Infrastructure.Persistance;
 
