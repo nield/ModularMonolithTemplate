@@ -1,6 +1,4 @@
-﻿using VerticalSliceTemplate.Api.Modules.Reminder.Public.Messages;
-
-namespace VerticalSliceTemplate.Api.Modules.Reminder.Endpoints.V1.Todos;
+﻿namespace VerticalSliceTemplate.Api.Modules.Reminder.Endpoints.V1.Todos;
 
 public sealed class Create : IEndpoint
 {
