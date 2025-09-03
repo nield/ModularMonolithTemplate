@@ -1,8 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore.Diagnostics;
 
-namespace VerticalSliceTemplate.Api.Modules.Reminder.Infrastructure;
+namespace VerticalSliceTemplate.Api.Modules.Reminder;
 
-internal static class Configuration
+internal static class ConfigurationServices
 {
     internal static void SetupReminderDatabase(this IHostApplicationBuilder builder)
     {

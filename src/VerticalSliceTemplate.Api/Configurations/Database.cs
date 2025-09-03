@@ -1,8 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using VerticalSliceTemplate.Api.Common.Infrastructure.Persistance.Interceptors;
-using VerticalSliceTemplate.Api.Modules.Reminder.Common.Interfaces;
-using VerticalSliceTemplate.Api.Modules.Reminder.Infrastructure;
+using VerticalSliceTemplate.Api.Modules.Reminder;
 
 namespace VerticalSliceTemplate.Api.Configurations;
 

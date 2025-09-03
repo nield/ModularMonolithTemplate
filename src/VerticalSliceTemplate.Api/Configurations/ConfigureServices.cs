@@ -28,6 +28,8 @@ internal static class ConfigureServices
 
         builder.Services.ConfigureHeaderPropagation();
 
+        builder.Services.ConfigureHttpClients(config);
+
         builder.SetupDatabase();
 
         builder.Services.AddProblemDetails(options => 
