@@ -39,6 +39,11 @@ public class CustomWebApplicationFactory : WebApplicationFactory<Program>
             CacheContainer.Instance.GetConnectionString()
         );
 
+        Environment.SetEnvironmentVariable(
+            "ConnectionStrings__RabbitMq",
+            RabbitContainer.Instance.GetConnectionString()
+        );
+
         builder.UseEnvironment(Constants.Environments.Test);
 
         builder.ConfigureTestServices(services =>

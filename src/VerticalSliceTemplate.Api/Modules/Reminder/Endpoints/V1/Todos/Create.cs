@@ -1,4 +1,6 @@
-﻿namespace VerticalSliceTemplate.Api.Modules.Reminder.Endpoints.V1.Todos;
+﻿using VerticalSliceTemplate.Api.Modules.Reminder.Public.Messages;
+
+namespace VerticalSliceTemplate.Api.Modules.Reminder.Endpoints.V1.Todos;
 
 public sealed class Create : IEndpoint
 {
@@ -31,6 +33,7 @@ public sealed class Create : IEndpoint
     public static async Task<CreatedAtRoute<Response>> Handler(
         [Validate] Request request,
         IToDoRepository toDoRepository,
+        IPublishMessageService publishMessageService,
         CancellationToken cancellationToken)
     {
         var newTodoItem = new ToDoItem
@@ -40,6 +43,14 @@ public sealed class Create : IEndpoint
         };
 
         await toDoRepository.AddAsync(newTodoItem, cancellationToken);
+
+        var createdToDo = new ToDoCreated
+        {
+            Id = newTodoItem.Id,
+            Title = newTodoItem.Title,            
+        };
+
+        await publishMessageService.Publish(createdToDo, cancellationToken);
 
         return TypedResults.CreatedAtRoute(
             new Response { Id = newTodoItem.Id }, "GetToDoById", new { id = newTodoItem.Id });

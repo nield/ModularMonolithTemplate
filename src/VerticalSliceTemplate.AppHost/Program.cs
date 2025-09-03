@@ -1,5 +1,9 @@
 var builder = DistributedApplication.CreateBuilder(args);
 
+var rabbit = builder.AddRabbitMQ("RabbitMq")
+                .WithLifetime(ContainerLifetime.Persistent)
+                .WithManagementPlugin(8001);
+
 var seq = builder.AddSeq("Seq", 8002)
     .WithLifetime(ContainerLifetime.Persistent);
 
@@ -16,6 +20,8 @@ builder.AddProject<Projects.VerticalSliceTemplate_Api>("verticalslicetemplate-ap
     .WaitFor(database)
     .WithReference(redis)
     .WaitFor(redis)
+    .WithReference(rabbit)
+    .WaitFor(rabbit)
     .WaitFor(seq)
     .WithEnvironment("SEQ_SERVER_URL", "http://localhost:8002");
 

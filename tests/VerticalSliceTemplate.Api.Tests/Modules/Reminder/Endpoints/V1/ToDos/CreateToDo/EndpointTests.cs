@@ -9,7 +9,11 @@ public class EndpointTests : BaseTestFixture
     {
         var request = Builder<Create.Request>.CreateNew().Build();
 
-        var sut = await Create.Handler(request, _toDoRepositoryMock, CancellationToken.None);
+        var sut = await Create.Handler(
+            request, 
+            _toDoRepositoryMock, 
+            _publishMessageService,
+            CancellationToken.None);
 
         sut.Should().NotBeNull();
 

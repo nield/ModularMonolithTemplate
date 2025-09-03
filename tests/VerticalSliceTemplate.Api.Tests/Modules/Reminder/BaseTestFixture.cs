@@ -23,4 +23,5 @@ public abstract class BaseTestFixture
     protected readonly IReminderDbContext _reminderDbContextMock = Substitute.For<IReminderDbContext>();
     protected readonly ICurrentUserService _currentUserServiceMock = Substitute.For<ICurrentUserService>();
     protected readonly IToDoRepository _toDoRepositoryMock = Substitute.For<IToDoRepository>();
+    protected readonly IPublishMessageService _publishMessageService = Substitute.For<IPublishMessageService>();
 }

@@ -30,6 +30,8 @@ internal static class ConfigureServices
 
         builder.Services.ConfigureHttpClients(config);
 
+        builder.Services.ConfigureMassTransit(config);
+
         builder.SetupDatabase();
 
         builder.Services.AddProblemDetails(options => 
