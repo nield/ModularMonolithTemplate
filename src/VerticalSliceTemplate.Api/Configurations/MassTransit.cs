@@ -1,4 +1,5 @@
 ﻿using MassTransit;
+using System.Reflection;
 using VerticalSliceTemplate.Api.Common.Infrastructure.Messaging;
 
 namespace VerticalSliceTemplate.Api.Configurations;
@@ -29,6 +30,8 @@ public static class MassTransit
         {
             config.AddTelemetryListener(true);
 
+            config.AddConsumers(Assembly.GetEntryAssembly());
+
             config.ConfigureHealthCheckOptions(options => options.Name = "MassTransit");
 
             config.UsingRabbitMq((context, rabbitConfig) =>
@@ -38,6 +41,8 @@ public static class MassTransit
                 ArgumentException.ThrowIfNullOrWhiteSpace(rabbitUri);
 
                 rabbitConfig.Host(new Uri(rabbitUri));
+
+                rabbitConfig.ConfigureEndpoints(context);
             });
         });
     }
