@@ -9,8 +9,6 @@ public sealed class GetAll : IEndpoint
             .WithDescription("Get all todos");
     }
 
-    public sealed record Response(long Id, string Title, List<string> Tags);
-
     public static async Task<IEnumerable<Response>> Handler(
         IReminderDbContext applicationDbContext,
         CancellationToken cancellationToken)
@@ -22,4 +20,6 @@ public sealed class GetAll : IEndpoint
 
         return data;
     }
+
+    public sealed record Response(long Id, string Title, List<string> Tags);
 }

@@ -24,4 +24,15 @@ internal static class ConfigurationServices
 
         builder.EnrichSqlServerDbContext<ReminderDbContext>();
     }
+
+    internal static async Task MigrateReminderDatabase(this WebApplication webApplication)
+    {
+        using var scope = webApplication.Services.CreateScope();
+
+        var dbContextInitialiser = scope.ServiceProvider.GetRequiredService<ReminderDbContextInitialiser>();
+
+        await dbContextInitialiser.MigrateDatabaseAsync();
+
+        await dbContextInitialiser.SeedDataAsync();
+    }
 }

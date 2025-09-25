@@ -1,4 +1,6 @@
-﻿namespace VerticalSliceTemplate.Api.Configurations;
+﻿using VerticalSliceTemplate.Api.Modules.Reminder;
+
+namespace VerticalSliceTemplate.Api.Configurations;
 
 internal static class Migrations
 {
@@ -6,19 +8,8 @@ internal static class Migrations
     {
         List<Task> tasks = []; 
       
-        tasks.Add(MigrateReminderDatabase(webApplication));
+        tasks.Add(webApplication.MigrateReminderDatabase());
 
         await Task.WhenAll(tasks);
-    }
-
-    private static async Task MigrateReminderDatabase(WebApplication webApplication)
-    {
-        using var scope = webApplication.Services.CreateScope();
-
-        var dbContextInitialiser = scope.ServiceProvider.GetRequiredService<ReminderDbContextInitialiser>();
-
-        await dbContextInitialiser.MigrateDatabaseAsync();
-
-        await dbContextInitialiser.SeedDataAsync();
     }
 }

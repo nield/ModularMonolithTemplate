@@ -10,8 +10,6 @@ public sealed class GetById : IEndpoint
             .WithName("GetToDoById");
     }
 
-    public sealed record Response(long Id, string Title, List<string> Tags);
-
     public static async Task<Response> Handler(
         [Required] long id,
         IToDoRepository toDoRepository,
@@ -26,4 +24,6 @@ public sealed class GetById : IEndpoint
 
         return new Response(todo.Id, todo.Title, todo.Tags);
     }
+
+    public sealed record Response(long Id, string Title, List<string> Tags);
 }
