@@ -8,7 +8,7 @@
     "description":  "Modular Monolith Architecture Template",
     "identity": "ModularMonolith.Architecture.Template",
     "shortName": "mma-template",
-    "sourceName": "VerticalSliceTemplate",
+    "sourceName": "ModularMonolithTemplate",
     "tags": {
       "language": "C#",
       "type": "project"

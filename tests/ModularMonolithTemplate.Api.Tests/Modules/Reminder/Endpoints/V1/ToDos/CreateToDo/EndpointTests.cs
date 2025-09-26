@@ -1,0 +1,22 @@
+﻿using ModularMonolithTemplate.Api.Modules.Reminder.Endpoints.V1.Todos;
+
+namespace ModularMonolithTemplate.Api.Tests.Modules.Reminder.Endpoints.V1.ToDos.CreateToDo;
+
+public class EndpointTests : BaseTestFixture
+{
+    [Fact]
+    public async Task Handle_Success()
+    {
+        var request = Builder<Create.Request>.CreateNew().Build();
+
+        var sut = await Create.Handler(
+            request, 
+            _toDoRepositoryMock, 
+            _publishMessageService,
+            CancellationToken.None);
+
+        sut.Should().NotBeNull();
+
+        sut.StatusCode.Should().Be(StatusCodes.Status201Created);
+    }
+}

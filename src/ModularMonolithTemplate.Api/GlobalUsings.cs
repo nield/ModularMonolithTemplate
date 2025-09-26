@@ -1,0 +1,11 @@
+﻿global using Microsoft.AspNetCore.Mvc;
+global using System.Net;
+global using ModularMonolithTemplate.Api.Common.Exceptions;
+global using ModularMonolithTemplate.Api.Common.Interfaces;
+global using ModularMonolithTemplate.Api.Common.Extensions;
+global using Microsoft.EntityFrameworkCore;
+global using FluentValidation;
+global using ModularMonolithTemplate.Api.Common;
+global using ModularMonolithTemplate.Api.Common.Validation;
+global using Microsoft.AspNetCore.Http.HttpResults;
+global using System.ComponentModel.DataAnnotations;
