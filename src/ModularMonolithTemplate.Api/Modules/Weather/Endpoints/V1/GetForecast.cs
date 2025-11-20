@@ -1,4 +1,6 @@
-﻿namespace ModularMonolithTemplate.Api.Modules.Weather.Endpoints.V1;
+﻿using ModularMonolithTemplate.Api.Modules.Weather.Common.Contants;
+
+namespace ModularMonolithTemplate.Api.Modules.Weather.Endpoints.V1;
 
 public sealed class GetForecast : IEndpoint
 {

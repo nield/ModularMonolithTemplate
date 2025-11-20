@@ -1,5 +1,7 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using ModularMonolithTemplate.Api.Common.Infrastructure.Persistance;
+using ModularMonolithTemplate.Api.Modules.Reminder.Entities;
 
 namespace ModularMonolithTemplate.Api.Modules.Reminder.Infrastructure.Persistance.Configuration;
 

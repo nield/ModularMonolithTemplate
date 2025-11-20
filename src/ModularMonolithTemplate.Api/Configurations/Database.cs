@@ -1,7 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using ModularMonolithTemplate.Api.Common.Infrastructure.Persistance.Interceptors;
-using ModularMonolithTemplate.Api.Modules.Reminder;
 
 namespace ModularMonolithTemplate.Api.Configurations;
 
@@ -13,13 +12,11 @@ internal static class Database
         builder.Services.AddScoped<ISaveChangesInterceptor, AuditableEntitySaveChangesInterceptor>();
 
         builder.Services.SetupRepositories();
-
-        builder.SetupReminderDatabase();
     }
 
     private static void SetupRepositories(this IServiceCollection services)
     {
-        services.Scan(scan => scan.FromAssemblyOf<IReminderDbContext>()
+        services.Scan(scan => scan.FromAssemblyOf<Program>()
                                     .AddClasses(c => c.AssignableTo(typeof(IRepository<>)))
                                     .AsImplementedInterfaces()
                                     .WithScopedLifetime());

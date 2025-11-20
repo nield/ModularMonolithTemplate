@@ -1,4 +1,7 @@
-﻿namespace ModularMonolithTemplate.Api.Modules.Reminder.Endpoints.V2.Todos;
+﻿using ModularMonolithTemplate.Api.Modules.Reminder.Common.Constants;
+using ModularMonolithTemplate.Api.Modules.Reminder.Common.Interfaces;
+
+namespace ModularMonolithTemplate.Api.Modules.Reminder.Endpoints.V2.Todos;
 
 public sealed class GetAll : IEndpoint
 {
@@ -10,7 +13,7 @@ public sealed class GetAll : IEndpoint
     }
 
     public static async Task<IEnumerable<Response>> Handler(
-        IReminderDbContext applicationDbContext,
+        IReminderQueryDbContext applicationDbContext,
         CancellationToken cancellationToken)
     {
         var data = await applicationDbContext.TodoItems

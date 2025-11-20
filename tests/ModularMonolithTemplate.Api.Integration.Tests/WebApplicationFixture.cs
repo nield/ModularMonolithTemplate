@@ -1,9 +1,9 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using System.Net.Http.Headers;
-using Microsoft.Extensions.DependencyInjection;
 using Respawn;
 using ModularMonolithTemplate.Api.Integration.Tests.Containers;
 using ModularMonolithTemplate.Api.Modules.Reminder.Infrastructure.Persistance;
+using ModularMonolithTemplate.Api.Modules.Reminder;
 
 namespace ModularMonolithTemplate.Api.Integration.Tests;
 
@@ -71,12 +71,7 @@ public class WebApplicationFixture : IAsyncLifetime
             await _respawner.ResetAsync(_databaseConnectionString!);
         }
 
-        using var scope = _factory.Services.CreateScope();
-
-        var dbContextInitialiser = scope.ServiceProvider.GetRequiredService<ReminderDbContextInitialiser>();
-
-        await dbContextInitialiser.MigrateDatabaseAsync();
-        await dbContextInitialiser.SeedDataAsync();
+        await _factory.Services.MigrateReminderDatabase();
     }
 
     public Task DisposeAsync()

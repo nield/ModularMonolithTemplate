@@ -1,4 +1,6 @@
-﻿namespace ModularMonolithTemplate.Api.Modules.Reminder.Entities;
+﻿using ModularMonolithTemplate.Api.Common.Infrastructure.Persistance;
+
+namespace ModularMonolithTemplate.Api.Modules.Reminder.Entities;
 
 public class ToDoItem : BaseAuditableEntity
 {

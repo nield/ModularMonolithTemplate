@@ -8,7 +8,9 @@ internal static class ConfigureServices
     {
         var config = builder.Configuration;
 
-        builder.Services.AddScoped<ICurrentUserService, CurrentUserService>();
+        builder.ConfigureModules();
+
+        builder.Services.ConfigureCommonServices();
 
         builder.Services.AddSingleton(TimeProvider.System);
 
@@ -46,5 +48,10 @@ internal static class ConfigureServices
             });
 
         return builder;
+    }
+
+    private static void ConfigureCommonServices(this IServiceCollection services)
+    {
+        services.AddScoped<ICurrentUserService, CurrentUserService>();
     }
 }

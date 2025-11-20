@@ -2,7 +2,7 @@
 
 namespace ModularMonolithTemplate.Api.Modules.Reminder.Common.Interfaces;
 
-public interface IToDoRepository : IRepository<ToDoItem>
+public interface IReminderQueryDbContext
 {
-    Task DeleteAll(CancellationToken cancellationToken = default);
+    DbSet<ToDoItem> TodoItems { get; }
 }

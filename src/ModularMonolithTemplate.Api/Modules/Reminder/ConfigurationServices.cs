@@ -1,14 +1,21 @@
 ﻿using Microsoft.EntityFrameworkCore.Diagnostics;
+using ModularMonolithTemplate.Api.Modules.Reminder.Common.Interfaces;
+using ModularMonolithTemplate.Api.Modules.Reminder.Infrastructure.Persistance;
 
 namespace ModularMonolithTemplate.Api.Modules.Reminder;
 
-internal static class ConfigurationServices
+public static class ConfigurationServices
 {
-    internal static void SetupReminderDatabase(this IHostApplicationBuilder builder)
+    internal static void SetupReminderModule(this IHostApplicationBuilder builder)
+    {
+        builder.SetupReminderDatabase();
+    }
+
+    private static void SetupReminderDatabase(this IHostApplicationBuilder builder)
     {
         builder.Services.AddScoped<ReminderDbContextInitialiser>();
 
-        builder.Services.AddScoped<IReminderDbContext>(provider =>
+        builder.Services.AddScoped<IReminderQueryDbContext>(provider =>
             provider.GetRequiredService<ReminderDbContext>());
 
         builder.Services.AddDbContext<ReminderDbContext>((sp, options) =>
@@ -25,9 +32,9 @@ internal static class ConfigurationServices
         builder.EnrichSqlServerDbContext<ReminderDbContext>();
     }
 
-    internal static async Task MigrateReminderDatabase(this WebApplication webApplication)
+    public static async Task MigrateReminderDatabase(this IServiceProvider serviceProvider)
     {
-        using var scope = webApplication.Services.CreateScope();
+        using var scope = serviceProvider.CreateScope();
 
         var dbContextInitialiser = scope.ServiceProvider.GetRequiredService<ReminderDbContextInitialiser>();
 

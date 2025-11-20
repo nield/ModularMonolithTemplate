@@ -2,7 +2,7 @@
 
 namespace ModularMonolithTemplate.Api.Tests.Modules.Reminder.Endpoints.V1.ToDos.CreateToDo;
 
-public class EndpointTests : BaseTestFixture
+public class EndpointTests : BaseReminderTestFixture
 {
     [Fact]
     public async Task Handle_Success()

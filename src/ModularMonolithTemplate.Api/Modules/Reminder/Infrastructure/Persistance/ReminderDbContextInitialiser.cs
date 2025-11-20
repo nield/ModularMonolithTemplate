@@ -1,4 +1,5 @@
-﻿using System.Diagnostics.CodeAnalysis;
+﻿using ModularMonolithTemplate.Api.Modules.Reminder.Entities;
+using System.Diagnostics.CodeAnalysis;
 
 namespace ModularMonolithTemplate.Api.Modules.Reminder.Infrastructure.Persistance;
 

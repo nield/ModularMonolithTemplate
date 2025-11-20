@@ -1,4 +1,5 @@
 ﻿using MassTransit;
+using ModularMonolithTemplate.Api.Modules.Reminder.Public.Messages;
 
 namespace ModularMonolithTemplate.Api.Modules.Weather.Consumers;
 

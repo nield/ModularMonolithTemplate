@@ -3,7 +3,7 @@ using ModularMonolithTemplate.Api.Modules.Reminder.Entities;
 
 namespace ModularMonolithTemplate.Api.Tests.Modules.Reminder.Endpoints.V1.ToDos.GetToDo;
 
-public class EndpointTests : BaseTestFixture
+public class EndpointTests : BaseReminderTestFixture
 {
     [Fact]
     public async Task Given_InvalidId_Should_ThrowException()

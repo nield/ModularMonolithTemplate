@@ -23,7 +23,7 @@ public class ArchitectureTests
     {
         var result = Types.InCurrentDomain()
             .That()
-            .ResideInNamespace("VerticalTemplate.Api.Modules.Reminder.Endpoints")
+            .ResideInNamespace("ModularMonolithTemplate.Api.Modules.Reminder.Endpoints")
             .Should()
             .BeSealed()
             .GetResult()
