@@ -17,7 +17,7 @@ internal sealed class RabbitContainer : BaseContainer<RabbitContainer>
             .WithPortBinding(RabbitDefaultPort, true)
             .WithEnvironment("RABBITMQ_DEFAULT_USER", Username)
             .WithEnvironment("RABBITMQ_DEFAULT_PASS", Password)
-            .WithWaitStrategy(Wait.ForUnixContainer().UntilPortIsAvailable(RabbitDefaultPort))
+            .WithWaitStrategy(Wait.ForUnixContainer().UntilInternalTcpPortIsAvailable(RabbitDefaultPort))
             .Build();
     }
 

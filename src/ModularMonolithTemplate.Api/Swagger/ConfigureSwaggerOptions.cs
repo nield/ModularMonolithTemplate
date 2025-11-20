@@ -3,7 +3,7 @@ using System.Text;
 using Asp.Versioning;
 using Asp.Versioning.ApiExplorer;
 using Microsoft.Extensions.Options;
-using Microsoft.OpenApi.Models;
+using Microsoft.OpenApi;
 using Swashbuckle.AspNetCore.SwaggerGen;
 
 namespace ModularMonolithTemplate.Api.Swagger;
@@ -38,8 +38,6 @@ public class ConfigureSwaggerOptions : IConfigureOptions<SwaggerGenOptions>
             // Use full name, but replace '+' (nested class separator) with '_'
             return type.FullName!.Replace("+", "_");
         });
-
-        options.OperationFilter<SwaggerDefaultValues>();
     }
 
     private static OpenApiInfo CreateInfoForApiVersion(ApiVersionDescription description)
