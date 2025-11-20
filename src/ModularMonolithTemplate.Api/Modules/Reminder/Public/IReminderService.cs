@@ -8,5 +8,5 @@ namespace ModularMonolithTemplate.Api.Modules.Reminder.Public;
 public interface IReminderService
 {
     [Get("/api/v1/todos")]
-    Task<IEnumerable<Endpoints.V1.Todos.GetAll.Response>> GetAllToDosAsync();
+    Task<IEnumerable<Endpoints.V1.Todos.GetAll.Response>> GetAllToDosAsync(CancellationToken cancellationToken = default);
 }

@@ -23,6 +23,20 @@ builder.AddProject<Projects.ModularMonolithTemplate_Api>("modularmonolithtemplat
     .WithReference(rabbit)
     .WaitFor(rabbit)
     .WaitFor(seq)
-    .WithEnvironment("SEQ_SERVER_URL", "http://localhost:8002");
+    .WithEnvironment("SEQ_SERVER_URL", "http://localhost:8002")
+    .WithUrls(context =>
+    {
+        foreach (var url in context.Urls)
+        {
+            url.DisplayLocation = UrlDisplayLocation.DetailsOnly;
+        }
+
+        context.Urls.Add(new ResourceUrlAnnotation
+        {
+            DisplayText = "Swagger UI",
+            Url = "/swagger",
+            Endpoint = context.GetEndpoint("https")
+        });
+    });
 
 await builder.Build().RunAsync();

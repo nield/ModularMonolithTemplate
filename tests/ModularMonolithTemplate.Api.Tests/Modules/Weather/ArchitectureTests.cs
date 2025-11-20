@@ -1,20 +1,20 @@
 ﻿using ModularMonolithTemplate.Api.Tests.CustomRules;
 using Types = NetArchTest.Rules.Types;
 
-namespace ModularMonolithTemplate.Api.Tests.Modules.Reminder;
+namespace ModularMonolithTemplate.Api.Tests.Modules.Weather;
 
 public class ArchitectureTests
 {
-    private const string _namespace = "ModularMonolithTemplate.Api.Modules.Reminder";
-
+    private const string _namespace = "ModularMonolithTemplate.Api.Modules.Weather";
+    
     [Fact]
     public void Endpoints_ShouldNotHaveDependencyOn_Infrastructure()
     {
         var result = Types.InCurrentDomain()
             .That()
-            .ResideInNamespace("ModularMonolithTemplate.Api.Modules.Reminder.Endpoints")
+            .ResideInNamespace("ModularMonolithTemplate.Api.Modules.Weather.Endpoints")
             .ShouldNot()
-            .HaveDependencyOn("ModularMonolithTemplate.Api.Modules.Reminder.Infrastructure")
+            .HaveDependencyOn("ModularMonolithTemplate.Api.Modules.Weather.Infrastructure")
             .GetResult()
             .IsSuccessful;
 
@@ -26,7 +26,7 @@ public class ArchitectureTests
     {
         var result = Types.InCurrentDomain()
             .That()
-            .ResideInNamespace("ModularMonolithTemplate.Api.Modules.Reminder.Endpoints")
+            .ResideInNamespace("ModularMonolithTemplate.Api.Modules.Weather.Endpoints")
             .Should()
             .BeSealed()
             .GetResult()
@@ -36,7 +36,7 @@ public class ArchitectureTests
     }
 
     [Fact]
-    public void Module_ShouldNotHaveDependencyOn_OtherModulesNotPubliclyExposed()
+    public void WeatherModule_ShouldNotHaveDependencyOn_OtherModulesNotPubliclyExposed()
     {
         var result = Types.InCurrentDomain()
             .That()

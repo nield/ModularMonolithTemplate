@@ -1,4 +1,5 @@
-﻿using ModularMonolithTemplate.Api.Modules.Weather.Common.Contants;
+﻿using ModularMonolithTemplate.Api.Modules.Reminder.Public;
+using ModularMonolithTemplate.Api.Modules.Weather.Common.Contants;
 
 namespace ModularMonolithTemplate.Api.Modules.Weather.Endpoints.V1;
 
@@ -11,8 +12,12 @@ public sealed class GetForecast : IEndpoint
             .WithTags(TagConstants.Weather);
     }
 
-    public static WeatherForecast[] Handler()
+    public static async Task<WeatherForecast[]> Handler(
+        IReminderService reminderService,
+        CancellationToken cancellationToken = default)
     {
+        var data = await reminderService.GetAllToDosAsync(cancellationToken);
+
         var summaries = new[]
         {
             "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
