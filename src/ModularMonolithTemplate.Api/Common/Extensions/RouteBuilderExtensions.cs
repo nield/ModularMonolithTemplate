@@ -3,8 +3,7 @@
 public static class RouteBuilderExtensions
 {
     public static RouteGroupBuilder UseMainRoute(this IEndpointRouteBuilder webApplication, int majorVersion = 1) =>
-        webApplication.MapGroup("api/v{version:apiVersion}")
-            .WithOpenApi()
+        webApplication.MapGroup("api/v{version:apiVersion}")            
             .WithApiVersionSet(VersionSets.GetVersionSet(majorVersion))
             .MapToApiVersion(majorVersion);
 

@@ -10,7 +10,12 @@ internal static class ConfigureServices
 
         builder.ConfigureModules();
 
+        builder.Services.Configure<RouteHandlerOptions>(options =>
+            options.ThrowOnBadRequest = true);
+
         builder.Services.ConfigureCommonServices();
+
+        builder.Services.AddOpenApi();
 
         builder.Services.AddSingleton(TimeProvider.System);
 
@@ -45,6 +50,15 @@ internal static class ConfigureServices
                 context.ProblemDetails.Extensions.TryAdd("requestId", context.HttpContext.TraceIdentifier);
 
                 context.ProblemDetails.Extensions.TryAdd("traceId", Activity.Current?.TraceId);
+
+                // Include invalid request details for bad requests
+                if (context.Exception is BadHttpRequestException ex)
+                {
+                    context.ProblemDetails.Title = "Invalid request";
+                    context.ProblemDetails.Detail = ex.GetFullErrorMessage();
+                    context.ProblemDetails.Status = StatusCodes.Status400BadRequest;
+                    context.HttpContext.Response.StatusCode = StatusCodes.Status400BadRequest;
+                }
             });
 
         return builder;

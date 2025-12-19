@@ -5,19 +5,22 @@ var builder = DistributedApplication.CreateBuilder(args);
 var rabbit = builder.AddRabbitMQ("RabbitMq")
     .WithLifetime(ContainerLifetime.Session)
     .WithManagementPlugin(8001)
-    .WithContainerName($"{baseContainerName}-rabbit");
+    .WithContainerName($"{baseContainerName}-rabbit")
+    .WithLifetime(ContainerLifetime.Persistent);
 
 var seq = builder.AddSeq("Seq", 8002)
     .WithLifetime(ContainerLifetime.Session)
-    .WithContainerName($"{baseContainerName}-seq");
+    .WithContainerName($"{baseContainerName}-seq")
+    .WithLifetime(ContainerLifetime.Persistent);
 
 var redis = builder.AddRedis("Redis", 8004)
     .WithLifetime(ContainerLifetime.Session)
-    .WithContainerName($"{baseContainerName}-redis");
+    .WithContainerName($"{baseContainerName}-redis")
+    .WithLifetime(ContainerLifetime.Persistent);
 
 var sqlPassword = builder.AddParameter("sqlPassword");
 var database = builder.AddSqlServer("Sql", sqlPassword, 8003)
-    .WithLifetime(ContainerLifetime.Session)
+    .WithLifetime(ContainerLifetime.Persistent)
     .WithContainerName($"{baseContainerName}-sql")
     .AddDatabase("SqlDatabase", "templateDb");
 

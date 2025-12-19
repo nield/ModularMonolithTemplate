@@ -26,6 +26,7 @@ app.AddApiEndpoints();
 
 if (!app.Environment.IsProduction())
 {
+    app.MapOpenApi();
     app.UseApiDocumentation();
 }
 
