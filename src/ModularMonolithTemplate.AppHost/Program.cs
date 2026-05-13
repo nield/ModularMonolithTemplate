@@ -3,18 +3,15 @@ const string baseContainerName = "modularmonolithtemplate";
 var builder = DistributedApplication.CreateBuilder(args);
 
 var rabbit = builder.AddRabbitMQ("RabbitMq")
-    .WithLifetime(ContainerLifetime.Session)
     .WithManagementPlugin(8001)
     .WithContainerName($"{baseContainerName}-rabbit")
     .WithLifetime(ContainerLifetime.Persistent);
 
 var seq = builder.AddSeq("Seq", 8002)
-    .WithLifetime(ContainerLifetime.Session)
     .WithContainerName($"{baseContainerName}-seq")
     .WithLifetime(ContainerLifetime.Persistent);
 
 var redis = builder.AddRedis("Redis", 8004)
-    .WithLifetime(ContainerLifetime.Session)
     .WithContainerName($"{baseContainerName}-redis")
     .WithLifetime(ContainerLifetime.Persistent);
 
