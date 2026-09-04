@@ -21,7 +21,7 @@ internal abstract class BaseContainer<TContainer>
 
     public abstract string GetConnectionString();
 
-    public async virtual Task StartContainerAsync(CancellationToken cancellationToken)
+    public virtual async Task StartContainerAsync(CancellationToken cancellationToken)
     {
         await _container.StartAsync(cancellationToken);
 

@@ -2,5 +2,6 @@
 
 public interface IEndpoint
 {
-    void AddRoute(IEndpointRouteBuilder app);
+    static abstract void AddRoute(IEndpointRouteBuilder app);
 }
+

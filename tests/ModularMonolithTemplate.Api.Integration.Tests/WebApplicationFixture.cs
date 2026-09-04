@@ -1,5 +1,6 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using System.Net.Http.Headers;
+using Microsoft.Data.SqlClient;
 using Respawn;
 using ModularMonolithTemplate.Api.Integration.Tests.Containers;
 using ModularMonolithTemplate.Api.Modules.Reminder.Infrastructure.Persistance;
@@ -12,7 +13,7 @@ public class WebApplicationFixture : IAsyncLifetime
 {
     private readonly CustomWebApplicationFactory _factory = new();
 
-    private string? _databaseConnectionString = null;
+    private SqlConnection? _databaseConnection = null;
     private Respawner? _respawner = null;
     private HttpClient? _httpClient = null;
 
@@ -36,10 +37,11 @@ public class WebApplicationFixture : IAsyncLifetime
         _httpClient = _factory.CreateClient();
 
         _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(Common.Constants.Environments.Test);
-
-        _databaseConnectionString = DatabaseContainer.Instance.GetConnectionString();
-
-        _respawner = await Respawner.CreateAsync(_databaseConnectionString, new RespawnerOptions
+        
+        _databaseConnection = new SqlConnection(DatabaseContainer.Instance.GetConnectionString());
+        await _databaseConnection.OpenAsync();
+        
+        _respawner = await Respawner.CreateAsync(_databaseConnection, new RespawnerOptions
         {
             TablesToIgnore = [ReminderDbContext.MigrationTableName],
             WithReseed = true
@@ -66,9 +68,9 @@ public class WebApplicationFixture : IAsyncLifetime
 
     public async Task ResetDatabaseAsync()
     {
-        if (_respawner is not null)
+        if (_respawner is not null && _databaseConnection is not null)
         {
-            await _respawner.ResetAsync(_databaseConnectionString!);
+            await _respawner.ResetAsync(_databaseConnection);
         }
 
         await _factory.Services.MigrateReminderDatabase();

@@ -5,7 +5,7 @@ namespace ModularMonolithTemplate.Api.Modules.Weather.Endpoints.V1;
 
 public sealed class GetForecast : IEndpoint
 {
-    public void AddRoute(IEndpointRouteBuilder app)
+    public static void AddRoute(IEndpointRouteBuilder app)
     {
         app.MapGetRoute("/weather/forecast", Handler)
             .WithDescription("Get weather forecast")
