@@ -7,7 +7,7 @@ namespace ModularMonolithTemplate.Api.Modules.Reminder.Endpoints.V1.Todos;
 
 public sealed class Create : IEndpoint
 {
-    public void AddRoute(IEndpointRouteBuilder app)
+    public static void AddRoute(IEndpointRouteBuilder app)
     {
         app.MapPostRoute("/todos", Handler)
             .WithTags(TagContants.Todos)
