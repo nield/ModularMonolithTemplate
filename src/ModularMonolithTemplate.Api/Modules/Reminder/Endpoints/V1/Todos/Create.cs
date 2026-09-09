@@ -9,35 +9,48 @@ public sealed class Create : IEndpoint
 {
     public static void AddRoute(IEndpointRouteBuilder app)
     {
-        app.MapPostRoute("/todos", Handler)
+        app.MapPostRoute("/todos", 
+            async ([Validate] Request request, Handler handler, CancellationToken cancellationToken) =>
+            {
+                var response = await handler.Handle(request, cancellationToken);
+
+                return TypedResults.CreatedAtRoute(
+                    new Response { Id = response.Id }, "GetToDoById", new { id = response.Id });
+            })
             .WithTags(TagContants.Todos)
             .WithDescription("Create new todo");
     }
 
-    public static async Task<CreatedAtRoute<Response>> Handler(
-        [Validate] Request request,
+    /// <summary>
+    /// This handler example should be used for more complex endpoints with in-depth business logic.
+    /// This example is simple, but this shows how the framework is intended to be used when complex logic is involved.
+    /// Benefit of this approach is individual methods in class can be unit tested. 
+    /// </summary>
+    public sealed class Handler(
         IToDoRepository toDoRepository,
-        IPublishMessageService publishMessageService,
-        CancellationToken cancellationToken)
+        IPublishMessageService publishMessageService) : IEndpointHandler
     {
-        var newTodoItem = new ToDoItem
+        public async Task<Response> Handle(
+            Request request, CancellationToken cancellationToken)
         {
-            Title = request.Title,
-            Tags = request.Tags
-        };
+            var newTodoItem = new ToDoItem
+            {
+                Title = request.Title,
+                Tags = request.Tags
+            };
 
-        await toDoRepository.AddAsync(newTodoItem, cancellationToken);
+            await toDoRepository.AddAsync(newTodoItem, cancellationToken);
 
-        var createdToDo = new ToDoCreated
-        {
-            Id = newTodoItem.Id,
-            Title = newTodoItem.Title,
-        };
-
-        await publishMessageService.Publish(createdToDo, cancellationToken);
-
-        return TypedResults.CreatedAtRoute(
-            new Response { Id = newTodoItem.Id }, "GetToDoById", new { id = newTodoItem.Id });
+            var createdToDo = new ToDoCreated
+            {
+                Id = newTodoItem.Id,
+                Title = newTodoItem.Title,
+            };
+            
+            await publishMessageService.Publish(createdToDo, cancellationToken);
+            
+            return new Response { Id = newTodoItem.Id };
+        }
     }
 
     public sealed class Request

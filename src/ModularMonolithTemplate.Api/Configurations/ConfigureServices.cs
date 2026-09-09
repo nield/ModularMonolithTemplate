@@ -38,6 +38,8 @@ internal static class ConfigureServices
         builder.Services.ConfigureHttpClients(config);
 
         builder.Services.ConfigureMassTransit(config);
+        
+        builder.Services.ConfigureEndpointHandlers();
 
         builder.SetupDatabase();
 

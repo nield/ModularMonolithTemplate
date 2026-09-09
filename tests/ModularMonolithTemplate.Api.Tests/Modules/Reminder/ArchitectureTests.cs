@@ -5,7 +5,7 @@ namespace ModularMonolithTemplate.Api.Tests.Modules.Reminder;
 
 public class ArchitectureTests
 {
-    private const string _namespace = "ModularMonolithTemplate.Api.Modules.Reminder";
+    private const string Namespace = "ModularMonolithTemplate.Api.Modules.Reminder";
 
     [Fact]
     public void Endpoints_ShouldNotHaveDependencyOn_Infrastructure()
@@ -40,9 +40,9 @@ public class ArchitectureTests
     {
         var result = Types.InCurrentDomain()
             .That()
-            .ResideInNamespace(_namespace)
+            .ResideInNamespace(Namespace)
             .Should()
-            .MeetCustomRule(new OnlyAllowPublicModuleAccessRule(_namespace))
+            .MeetCustomRule(new OnlyAllowPublicModuleAccessRule(Namespace))
             .GetResult();
 
         Assert.True(result.IsSuccessful);

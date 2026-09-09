@@ -27,7 +27,7 @@ public static class ConfigurationServices
                 config.MigrationsHistoryTable(ReminderDbContext.MigrationTableName, ReminderDbContext.DbSchema);
             })
             .EnableSensitiveDataLogging(builder.Environment.IsDevelopment());
-        }, ServiceLifetime.Scoped);
+        });
 
         builder.EnrichSqlServerDbContext<ReminderDbContext>();
     }

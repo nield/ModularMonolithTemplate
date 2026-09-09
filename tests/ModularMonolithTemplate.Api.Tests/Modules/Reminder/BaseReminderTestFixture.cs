@@ -5,21 +5,23 @@ namespace ModularMonolithTemplate.Api.Tests.Modules.Reminder;
 
 public abstract class BaseReminderTestFixture<T> : BaseTestFixture where T : class
 {
-    protected T Instance;
+    private readonly Lazy<T> _lazyInstance;
 
-    protected readonly ILogger<T> _logger = Substitute.For<ILogger<T>>();
+    protected readonly ILogger<T> Logger = Substitute.For<ILogger<T>>();
 
 
     protected BaseReminderTestFixture()
     {
-        Instance = CreateInstance();
+        _lazyInstance = new Lazy<T>(CreateInstance);
     }
 
     protected abstract T CreateInstance();
+
+    protected T Instance => _lazyInstance.Value;
 }
 
 public abstract class BaseReminderTestFixture : BaseTestFixture
 {
-    protected readonly IReminderQueryDbContext _reminderDbContextMock = Substitute.For<IReminderQueryDbContext>();
-    protected readonly IToDoRepository _toDoRepositoryMock = Substitute.For<IToDoRepository>();
+    protected readonly IReminderQueryDbContext ReminderDbContextMock = Substitute.For<IReminderQueryDbContext>();
+    protected readonly IToDoRepository ToDoRepositoryMock = Substitute.For<IToDoRepository>();
 }

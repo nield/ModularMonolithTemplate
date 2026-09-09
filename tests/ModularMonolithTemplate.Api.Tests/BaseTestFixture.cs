@@ -1,24 +1,26 @@
 ﻿using Microsoft.Extensions.Logging;
 using ModularMonolithTemplate.Api.Common.Interfaces;
 
-namespace ModularMonolithTemplate.Api.Tests.Modules.Reminder;
+namespace ModularMonolithTemplate.Api.Tests;
 
 public abstract class BaseTestFixture<T> : BaseTestFixture where T : class
 {
-    protected T Instance;
+    private readonly Lazy<T> _lazyInstance;
 
-    protected readonly ILogger<T> _logger = Substitute.For<ILogger<T>>();
+    protected readonly ILogger<T> Logger = Substitute.For<ILogger<T>>();
 
     protected BaseTestFixture()
     {
-        Instance = CreateInstance();
+        _lazyInstance = new Lazy<T>(CreateInstance);
     }
 
     protected abstract T CreateInstance();
+
+    protected T Instance => _lazyInstance.Value;
 }
 
 public abstract class BaseTestFixture
 {
-    protected readonly ICurrentUserService _currentUserServiceMock = Substitute.For<ICurrentUserService>();
-    protected readonly IPublishMessageService _publishMessageService = Substitute.For<IPublishMessageService>();
+    protected readonly ICurrentUserService CurrentUserServiceMock = Substitute.For<ICurrentUserService>();
+    protected readonly IPublishMessageService PublishMessageServiceMock = Substitute.For<IPublishMessageService>();
 }

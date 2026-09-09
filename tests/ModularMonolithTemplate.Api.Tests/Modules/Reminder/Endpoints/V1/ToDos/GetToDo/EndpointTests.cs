@@ -10,11 +10,11 @@ public class EndpointTests : BaseReminderTestFixture
     {
         var id = 1L;
 
-        _reminderDbContextMock.TodoItems.FindAsync(id, Arg.Any<CancellationToken>())
+        ReminderDbContextMock.TodoItems.FindAsync(id, Arg.Any<CancellationToken>())
             .ReturnsNull();
 
         await Assert.ThrowsAsync<NotFoundException>(() =>
-            GetById.Handler(id, _toDoRepositoryMock, CancellationToken.None));
+            GetById.Handler(id, ToDoRepositoryMock, CancellationToken.None));
     }
 
     [Fact]
@@ -24,10 +24,10 @@ public class EndpointTests : BaseReminderTestFixture
 
         var item = Builder<ToDoItem>.CreateNew().Build();
 
-        _toDoRepositoryMock.GetByIdAsync(id, Arg.Any<CancellationToken>())
+        ToDoRepositoryMock.GetByIdAsync(id, Arg.Any<CancellationToken>())
             .Returns(item);
 
-        var sut = await GetById.Handler(id, _toDoRepositoryMock, CancellationToken.None);
+        var sut = await GetById.Handler(id, ToDoRepositoryMock, CancellationToken.None);
 
         sut.Should().NotBeNull();
     }

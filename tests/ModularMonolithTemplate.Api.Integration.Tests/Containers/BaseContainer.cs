@@ -8,13 +8,17 @@ internal abstract class BaseContainer<TContainer>
 {
     private static readonly Lazy<TContainer> SingleLazyInstance = new(() => new TContainer());
 
+    private readonly Lazy<IContainer> _lazyContainer;
+    
+    // Used to set up integration tests
     public static TContainer Instance => SingleLazyInstance.Value;
 
-    protected readonly IContainer _container;
-
+    // Used when setting up the container
+    protected IContainer Container => _lazyContainer.Value;
+    
     protected BaseContainer()
     {
-        _container = BuildContainer();
+        _lazyContainer = new Lazy<IContainer>(BuildContainer);
     }
 
     protected abstract IContainer BuildContainer();
@@ -23,7 +27,7 @@ internal abstract class BaseContainer<TContainer>
 
     public virtual async Task StartContainerAsync(CancellationToken cancellationToken)
     {
-        await _container.StartAsync(cancellationToken);
+        await Container.StartAsync(cancellationToken);
 
         var containerRunning = IsContainerRunning(cancellationToken);
 
@@ -36,11 +40,11 @@ internal abstract class BaseContainer<TContainer>
     private bool IsContainerRunning(CancellationToken cancellationToken)
     {
         while (!cancellationToken.IsCancellationRequested
-            && _container.State != TestcontainersStates.Running)
+            && Container.State != TestcontainersStates.Running)
         {
             Thread.Sleep(250);
         }
 
-        return _container.State == TestcontainersStates.Running;
+        return Container.State == TestcontainersStates.Running;
     }
 }

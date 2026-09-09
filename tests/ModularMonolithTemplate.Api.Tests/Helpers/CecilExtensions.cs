@@ -45,6 +45,6 @@ internal static class CecilExtensions
             }
         }
 
-        return namespaces.Where(n => n != null)!;
+        return namespaces.Where(n => n != null);
     }
 }

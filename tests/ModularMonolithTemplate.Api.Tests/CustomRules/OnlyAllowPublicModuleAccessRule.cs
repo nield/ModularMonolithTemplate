@@ -6,7 +6,7 @@ namespace ModularMonolithTemplate.Api.Tests.CustomRules;
 
 public class OnlyAllowPublicModuleAccessRule : ICustomRule
 {
-    private const string _modules = "Modules";
+    private const string Modules = "Modules";
 
     private readonly string _currentModuleNamespace;
 
@@ -17,11 +17,11 @@ public class OnlyAllowPublicModuleAccessRule : ICustomRule
 
     public bool MeetsRule(TypeDefinition type)
     {
-        if (type.Namespace.Contains(_modules))
+        if (type.Namespace.Contains(Modules))
         {
             var referencedNamespaces = type.GetReferencedNamespaces();
 
-            var nonPublicAccessToOtherModules = referencedNamespaces.Where(x => x.Contains(_modules)
+            var nonPublicAccessToOtherModules = referencedNamespaces.Where(x => x.Contains(Modules)
                                                             && !x.Contains(_currentModuleNamespace)
                                                             && !x.EndsWith("public", StringComparison.OrdinalIgnoreCase));
             return !nonPublicAccessToOtherModules.Any();

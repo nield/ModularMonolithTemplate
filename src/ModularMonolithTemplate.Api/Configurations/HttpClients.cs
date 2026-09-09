@@ -7,7 +7,7 @@ namespace ModularMonolithTemplate.Api.Configurations;
 
 internal static class HttpClients
 {
-    private static readonly RefitSettings _defaultRefitSettings = new()
+    private static readonly RefitSettings DefaultRefitSettings = new()
     {
         ContentSerializer = new SystemTextJsonContentSerializer(
             new JsonSerializerOptions(JsonSerializerDefaults.Web))
@@ -17,16 +17,16 @@ internal static class HttpClients
     {
         var reminderUri = configuration.GetValue<string>("ExternalServices:Reminder:BaseUrl");
 
-        ArgumentNullException.ThrowIfNullOrWhiteSpace(reminderUri);
+        ArgumentException.ThrowIfNullOrWhiteSpace(reminderUri);
 
-        services.AddRefitClient<IReminderService>(_defaultRefitSettings)
+        services.AddRefitClient<IReminderService>(DefaultRefitSettings)
             .ConfigureHttpClient((sp, config) =>
             {
                 using var scope = sp.CreateScope();
 
                 var currentUserService = scope.ServiceProvider.GetRequiredService<ICurrentUserService>();
 
-                var token = currentUserService.Token?.Replace("Bearer", "")?.Trim();
+                var token = currentUserService.Token?.Replace("Bearer", "").Trim();
 
                 config.BaseAddress = new Uri(reminderUri);
                 config.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
