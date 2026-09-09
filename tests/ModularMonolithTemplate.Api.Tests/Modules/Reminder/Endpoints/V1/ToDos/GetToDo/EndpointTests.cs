@@ -10,7 +10,9 @@ public class EndpointTests : BaseReminderTestFixture
     {
         var id = 1L;
 
+#pragma warning disable xUnit1051
         ReminderDbContextMock.TodoItems.FindAsync(id, Arg.Any<CancellationToken>())
+#pragma warning restore xUnit1051
             .ReturnsNull();
 
         await Assert.ThrowsAsync<NotFoundException>(() =>

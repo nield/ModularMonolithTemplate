@@ -30,7 +30,7 @@ public class WebApplicationFixture : IAsyncLifetime
         }
     }
 
-    public async Task InitializeAsync()
+    public async ValueTask InitializeAsync()
     {
         await StartContainers();
 
@@ -76,10 +76,13 @@ public class WebApplicationFixture : IAsyncLifetime
         await _factory.Services.MigrateReminderDatabase();
     }
 
-    public Task DisposeAsync()
+    public async ValueTask DisposeAsync()
     {
+        if (_databaseConnection is not null)
+        {
+            // dispose also closes the connection
+            await _databaseConnection.DisposeAsync();
+        }
         _httpClient?.Dispose();
-
-        return Task.CompletedTask;
     }
 }

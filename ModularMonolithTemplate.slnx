@@ -1,0 +1,11 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/ModularMonolithTemplate.Api/ModularMonolithTemplate.Api.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/ModularMonolithTemplate.Api.Integration.Tests/ModularMonolithTemplate.Api.Integration.Tests.csproj" />
+    <Project Path="tests/ModularMonolithTemplate.Api.Tests/ModularMonolithTemplate.Api.Tests.csproj" />
+  </Folder>
+  <Project Path="src/ModularMonolithTemplate.AppHost/ModularMonolithTemplate.AppHost.csproj" />
+  <Project Path="src/ModularMonolithTemplate.ServiceDefaults/ModularMonolithTemplate.ServiceDefaults.csproj" />
+</Solution>
