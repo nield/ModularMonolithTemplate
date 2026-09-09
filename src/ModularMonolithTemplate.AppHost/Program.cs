@@ -41,7 +41,9 @@ builder.AddProject<Projects.ModularMonolithTemplate_Api>($"{baseContainerName}-a
         {
             DisplayText = "Swagger UI",
             Url = "/swagger",
-            Endpoint = context.GetEndpoint("https")
+            Endpoint = context.GetEndpoint("https") is { Exists: true } https
+                ? https
+                : context.GetEndpoint("http")
         });
     });
 

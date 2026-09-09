@@ -1,4 +1,4 @@
-﻿namespace MinimalApiTemplate.Api.Common.Models;
+﻿namespace ModularMonolithTemplate.Api.Common.Models;
 
 public class PaginatedListResponse<T>
 {

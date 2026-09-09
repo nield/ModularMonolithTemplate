@@ -6,7 +6,7 @@ namespace ModularMonolithTemplate.Api.Modules.Reminder.Infrastructure.Persistanc
 
 public class ReminderDbContext : DbContext, IReminderQueryDbContext
 {
-    private const string _configNamespace = "ModularMonolithTemplate.Api.Modules.Reminder.Infrastructure.Persistance.Configuration";
+    private const string ConfigNamespace = "ModularMonolithTemplate.Api.Modules.Reminder.Infrastructure.Persistance.Configuration";
 
     public static readonly string MigrationTableName = "__EFMigrationsHistory";
     public static readonly string DbSchema = "reminders";
@@ -26,7 +26,7 @@ public class ReminderDbContext : DbContext, IReminderQueryDbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly(), x => x.Namespace == _configNamespace);
+        modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly(), x => x.Namespace == ConfigNamespace);
         modelBuilder.HasDefaultSchema(DbSchema);
 
         base.OnModelCreating(modelBuilder);

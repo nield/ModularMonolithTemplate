@@ -1,6 +1,5 @@
 ﻿#pragma warning disable IDE0130 // Namespace does not match folder structure
-using ModularMonolithTemplate.Api.Common;
-
+// ReSharper disable once CheckNamespace
 namespace Microsoft.Extensions.Hosting;
 #pragma warning restore IDE0130 // Namespace does not match folder structure
 
